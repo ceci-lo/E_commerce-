@@ -1,0 +1,53 @@
+/**Style guide*/
+/**## Colors
+
+### Primary
+
+- Orange: hsl(26, 100%, 55%)
+- Pale orange: hsl(25, 100%, 94%)
+
+### Neutral
+
+- Very dark blue: hsl(220, 13%, 13%)
+- Dark grayish blue: hsl(219, 9%, 45%)
+- Grayish blue: hsl(220, 14%, 75%)
+- Light grayish blue: hsl(223, 64%, 98%)
+- White: hsl(0, 0%, 100%)
+- Black (with 75% opacity for lightbox background): hsl(0, 0%, 0%)*/
+
+
+/***************-----------------------------***************/
+/**             MOBILE screen 375px                       **/
+/***********************************************************/
+* {
+    padding: 0;
+    margin: 0;
+    font-size: 16px;
+}
+.kumbh-sans-nameCompany {
+    font-family: "Kumbh Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+    font-variation-settings:
+      "YOPQ" 300;
+  }
+@media (min-width: 375px) {
+    .nameCompany{
+        font-size: 30px !important;
+        font-weight: bold;
+    }
+    .container-nav-avatar {
+        display: flex;
+        justify-content: space-evenly;
+
+    }
+    .img-cart{
+        width:15%;
+    }
+    .img-avatar {
+        width: 25%;
+    }
+
+
+}
