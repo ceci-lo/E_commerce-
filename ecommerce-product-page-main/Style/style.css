@@ -23,19 +23,20 @@
     padding: 0;
     margin: 0;
     font-size: 16px;
-}
-.kumbh-sans-nameCompany {
     font-family: "Kumbh Sans", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 200;
-    font-style: normal;
-    font-variation-settings:
-      "YOPQ" 300;
-  }
+}
+
 @media (min-width: 375px) {
     .nameCompany{
         font-size: 30px !important;
         font-weight: bold;
+    }
+    .nav{
+        background-color: antiquewhite !important;
+    }
+    .hamburger_button{
+        border:none !important;
+        
     }
     .container-nav-avatar {
         display: flex;
