@@ -12001,6 +12001,13 @@ textarea.form-control-lg {
   .containerImg{
       width: 100%;
   }
-
+ .btns{
+  width:100%;
+  padding: 3% 0 3% 0;
+  margin: 2.5% 0 2.5% 0;
+ }
+ #container3{
+  margin: 5.5% ;
+ }
 
 }
