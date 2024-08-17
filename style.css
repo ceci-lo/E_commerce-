@@ -11965,3 +11965,42 @@ textarea.form-control-lg {
     display: none !important;
   }
 }/*# sourceMappingURL=style.css.map */
+
+/************************** My code  ***********************/
+
+* {
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+  font-family: "Kumbh Sans", sans-serif;
+}
+
+@media (min-width: 375px) {
+  .nameCompany{
+      font-size: 30px !important;
+      font-weight: bold;
+  }
+  .nav{
+      background-color: antiquewhite !important;
+  }
+  .hamburger_button{
+      border:none !important;
+      
+  }
+  .container-nav-avatar {
+      display: flex;
+      justify-content: space-evenly;
+
+  }
+  .img-cart{
+      width:15%;
+  }
+  .img-avatar {
+      width: 25%;
+  }
+  .containerImg{
+      width: 100%;
+  }
+
+
+}
