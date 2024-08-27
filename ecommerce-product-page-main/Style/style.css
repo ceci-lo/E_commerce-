@@ -49,6 +49,10 @@
     .img-avatar {
         width: 25%;
     }
-
-
+    .precio{
+        text-decoration: line-through;
+    }
+    .precioDescontado{
+        font-size: 30px;
+    }
 }

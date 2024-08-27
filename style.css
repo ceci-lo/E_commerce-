@@ -12006,8 +12006,28 @@ textarea.form-control-lg {
   padding: 3% 0 3% 0;
   margin: 2.5% 0 2.5% 0;
  }
+ #btnCantidad{
+  display: flex;
+    justify-content: space-around;
+ }
  #container3{
   margin: 5.5% ;
  }
-
+ .precios{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+ }
+ .porcentajeDescuento{
+  font-size: 20px;
+  border-radius: 15%;
+        padding: 4px 8px 4px 8px;
+ }
+ .precioDescontado{
+ font-size: 30px;
+}
+ #precio{
+  text-decoration: line-through;
+  font-size: 17px;
+ }
 }
