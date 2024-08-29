@@ -11984,13 +11984,11 @@ textarea.form-control-lg {
       background-color: antiquewhite !important;
   }
   .hamburger_button{
-      border:none !important;
-      
+      border:none !important;  
   }
   .container-nav-avatar {
       display: flex;
       justify-content: space-evenly;
-
   }
   .img-cart{
       width:15%;
@@ -12010,7 +12008,7 @@ textarea.form-control-lg {
   display: flex;
     justify-content: space-around;
  }
- #container3{
+ .container3{
   margin: 5.5% ;
  }
  .precios{
@@ -12018,10 +12016,16 @@ textarea.form-control-lg {
   justify-content: space-between;
   align-items: center;
  }
+ .descuento{
+  display: flex;
+  align-items: center;
+ }
  .porcentajeDescuento{
-  font-size: 20px;
-  border-radius: 15%;
-        padding: 4px 8px 4px 8px;
+  font-size: 15px;
+  border-radius: 13%;
+  padding: 3px 9px 2px 9px;
+  margin-left: 12px;
+  align-items: center;
  }
  .precioDescontado{
  font-size: 30px;
@@ -12029,5 +12033,6 @@ textarea.form-control-lg {
  #precio{
   text-decoration: line-through;
   font-size: 17px;
+
  }
 }

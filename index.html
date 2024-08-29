@@ -29,30 +29,46 @@
 <body>
 
   <div>
-    <nav class="navbar bg-primary navbar-expand-lg ">
-      <div class="container hstack gap-3 ">
-        <button class="navbar-toggler p-2 hamburger_button" type="button" data-bs-toggle="collapse"
-          data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
-          aria-label="Toggle navigation">
+    <nav class="navbar bg-body-tertiary fixed-top">
+      <div class="container-fluid">
+       <button class="navbar-toggler  hamburger_button" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav">
-            <a class="nav-link active" aria-current="page" href="#">Collections</a>
-            <a class="nav-link" href="#">Men</a>
-            <a class="nav-link" href="#">Women</a>
-            <a class="nav-link" aria-disabled="true">About</a>
-            <a class="nav-link" href="#"> Contact</a>
-          </div>
-        </div>
-        <a class="navbar-brand p-2 nameCompany" href="#">sneakers</a>
+        <a class="navbar-brand nameCompany" href="#" >sneakers</a>
         <div class="container-nav-avatar">
           <img class="img-cart" src="/ecommerce-product-page-main/images/icon-cart.svg" alt="icono carta">
           <img class="img-avatar" src="/ecommerce-product-page-main/images/image-avatar.png" alt="">
         </div>
-
+        <div class="offcanvas offcanvas-start w-75" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+          <div class="offcanvas-header">
+            <button type="button" class="btn-close start" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Collections</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Men</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Women</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Contact</a>
+              </li>
+             
+            </ul>
+            
+          </div>
+        </div>
       </div>
     </nav>
+
+
   </div>
   <div id="carouselExample" class="carousel slide">
     <div class="carousel-inner">
@@ -81,7 +97,7 @@
     </button>
   </div>
   <!-------------------------------------------------------------------------------------------->
-  <div id="container3">
+  <div class="container3">
     <div>
       <h5 class="text-warning"> Sneaker company </h5>
       <h1> Fall Limited Edition Sneakers</h1>
@@ -93,7 +109,7 @@
         <span class="precioDescontado">$125.00</span>
         <span class="text-bg-dark porcentajeDescuento">50%</span>
       </div>
-      <span id="precio">$250.00</span>
+      <span id="precio" class="text-warning ">$250.00</span>
     </div>
     <button class="btn btn-light btns" id="btnCantidad"><span><img
           src="/ecommerce-product-page-main/images/icon-minus.svg" alt="" srcset=""></span> 0 <span><img
@@ -102,9 +118,9 @@
           src="/ecommerce-product-page-main/images/icon-cart.svg" alt=""></span> Add to card </button>
   </div>
   <!----------------------------------------------------------------------------------------------------->
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
-    Coded by <a href="http://cecilialorenziniportafolio.netlifly"><span>Cecilia Lorenzini</span></a>.
+  <div class="attribution container3">
+    Challenge by <a href="https://www.frontendmentor.io/challenges/ecommerce-product-page-UPsZ9MJp6/hub" class="text-dark">Frontend Mentor.</a>
+    Coded by <a href="http://cecilialorenziniportafolio.netlifly" class="text-dark">Cecilia Lorenzini.</a>
   </div>
   <script src="/ecommerce-product-page-main/script/script.js"></script>
   <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
