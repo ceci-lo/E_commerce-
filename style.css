@@ -11999,12 +11999,19 @@ textarea.form-control-lg {
   .containerImg{
       width: 100%;
   }
+  /** Botones*/
  .btns{
   width:100%;
   padding: 3% 0 3% 0;
-  margin: 2.5% 0 2.5% 0;
-  
+  margin: 2.5% 0 2.5% 0; 
  }
+
+ .btnBasket{
+  background-image: url(./ecommerce-product-page-main/images/icon-cart.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+ }
+
  #btnCantidad{
   display: flex;
     justify-content: space-around;
