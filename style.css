@@ -12003,10 +12003,15 @@ textarea.form-control-lg {
   width:100%;
   padding: 3% 0 3% 0;
   margin: 2.5% 0 2.5% 0;
+  
  }
  #btnCantidad{
   display: flex;
     justify-content: space-around;
+ }
+ #btnAdd{
+  box-shadow: 0px 22px 28px 0px rgba(240,214,181,0.81);
+  cursor: pointer;
  }
  .container3{
   margin: 5.5% ;
