@@ -22,8 +22,9 @@ caja.className = "card";
 
  
 let header = document.createElement("div");
-header.className = "card-header"
+header.className = "card-header bg-sencondary"
 header.innerText = "Cart"
+header.style.backgroundColor = "hsl(0, 0%, 100%)";
  caja.appendChild(header)
 
 let bodyCard = document.createElement("div");
@@ -31,8 +32,9 @@ bodyCard.className = "card-body"
  caja.appendChild(bodyCard)
 
 let p = document.createElement("p");
-p.className = "card-title";
-p.innerText = "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Temporibus necessitatibus nemo expedita non labore, perferendis repudiandae enim quas culpa? Animi iste autem aut aliquid nemo corporis quas ipsa consequuntur ipsum";
+p.className = "card-title text-warning";
+p.innerText = "Your cart is empty";
+p.style.textAlign = "center";
 
 bodyCard.appendChild(p)
 
