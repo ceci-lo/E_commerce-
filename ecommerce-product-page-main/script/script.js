@@ -19,7 +19,18 @@ const addCard = () => {
     
 let caja = document.createElement("div");
 caja.className = "card";
+caja.style.position = "absolute";
+caja.style.zIndex = "2"
+caja.style.marginTop = "80px";
+caja.style.marginLeft = "25px";
+caja.style.width = "90%";
+caja.style.height = "70vw";
 
+
+
+let slide = document.getElementsByClassName("carousel")[0];
+
+slide.style.zIndex = "1"
  
 let header = document.createElement("div");
 header.className = "card-header bg-sencondary"
@@ -39,10 +50,10 @@ p.style.textAlign = "center";
 bodyCard.appendChild(p)
 
 
-let parentDiv = document.getElementsByClassName("carousel")[0].parentNode;
+let parentDiv = slide.parentNode;
 
-let  sp2 = document.getElementsByClassName("carousel")[0];
+
 
  
-  parentDiv.insertBefore(caja, sp2);
+  parentDiv.insertBefore(caja, slide);
 }
