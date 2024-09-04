@@ -1,10 +1,18 @@
 console.log("hola mundo");
 const btnBasket = document.getElementsByClassName("btnBasket")[0];
-
+let cuentaClicks = 0
 btnBasket.addEventListener("click", (e) => {
    e.preventDefault();
-    console.log("click")
+   e.stopPropagation();
     addCard();
+     cuentaClicks++
+    let caja = document.getElementsByClassName("card")[0]
+   if(caja && cuentaClicks == 2){ 
+      
+      caja.remove();
+       console.log("entre al if")
+   }
+ 
 })
 
 
@@ -50,10 +58,12 @@ let parentDiv = slide.parentNode;
   parentDiv.insertBefore(caja, slide);
 }
 
+
 let menos = document.getElementsByClassName("minus")[0];
 let mas = document.getElementById("plus");
 let valor = document.getElementsByClassName("value")[0];
  let contador = 1;
+
 mas.addEventListener("click",(e)=>{
    e.preventDefault();
   valor.innerHTML = contador;
@@ -67,3 +77,7 @@ contador--
  
   console.log(contador)
 })
+
+/**
+ * Funciones mas y menos agregan o quita un articulo de la lista antes de añadirlo a la basket
+ */
