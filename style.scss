@@ -1,0 +1,20 @@
+$primary: hsl(0, 0%, 100%);
+$secondary: hsl(26, 100%, 55%);
+$success:hsl(25, 100%, 94%);
+$info: hsl(220, 13%, 13%);
+$warning:  hsl(219, 9%, 45%);
+$danger: hsl(220, 14%, 75%);
+$light:  hsl(223, 64%, 98%);
+$dark: hsl(0, 0%, 0%);
+$theme-colors: (
+  "primary":    $primary,
+  "secondary":  $secondary,
+  "success":    $success,
+  "info":       $info,
+  "warning":    $warning,
+  "danger":     $danger,
+  "light":      $light,
+  "dark":       $dark
+);
+
+@import "./node_modules/bootstrap/scss/bootstrap.scss"
