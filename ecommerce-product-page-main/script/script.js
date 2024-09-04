@@ -9,14 +9,6 @@ btnBasket.addEventListener("click", (e) => {
 
 
 const addCard = () => {
-    /*<div class="card" style="width: 18rem;">
-            <div class="card-body">
-            <h5 class="card-title">Special title treatment</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-    </div>*/
-    
 let caja = document.createElement("div");
 caja.className = "card";
 caja.style.position = "absolute";
@@ -57,3 +49,21 @@ let parentDiv = slide.parentNode;
  
   parentDiv.insertBefore(caja, slide);
 }
+
+let menos = document.getElementsByClassName("minus")[0];
+let mas = document.getElementById("plus");
+let valor = document.getElementsByClassName("value")[0];
+ let contador = 1;
+mas.addEventListener("click",(e)=>{
+   e.preventDefault();
+  valor.innerHTML = contador;
+  contador++
+})
+
+menos.addEventListener("click", (e)=>{
+  e.preventDefault
+  valor.innerHTML = contador - 1;
+contador--
+ 
+  console.log(contador)
+})
