@@ -64,6 +64,10 @@ let mas = document.getElementById("plus");
 let valor = document.getElementsByClassName("value")[0];
  let contador = 1;
 
+
+/**
+ * Funciones mas y menos agregan o quita un articulo de la lista antes de añadirlo a la basket
+ */
 mas.addEventListener("click",(e)=>{
    e.preventDefault();
   valor.innerHTML = contador;
@@ -78,6 +82,22 @@ contador--
   console.log(contador)
 })
 
-/**
- * Funciones mas y menos agregan o quita un articulo de la lista antes de añadirlo a la basket
- */
+
+let datos = []
+let xhr = new XMLHttpRequest();
+
+xhr.open("get", "/data.json");
+
+xhr.onreadystatechange = function() {
+  if (xhr.readyState === 4 && xhr.status === 200) {
+      
+      let data = JSON.parse(xhr.response);
+      console.log( data[0].title);
+     document.getElementById("titleProduct").innerText = data[0].title
+     document.getElementById("descriptionProduct").innerText = data[0].description
+
+     
+  }
+};
+xhr.send()
+
