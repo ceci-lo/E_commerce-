@@ -1,4 +1,51 @@
-console.log("hola mundo");
+/**Pedido de datos por ajax */
+let datos = []
+let xhr = new XMLHttpRequest();
+
+xhr.open("get", "/data.json");
+
+xhr.onreadystatechange = function() {
+  if (xhr.readyState === 4 && xhr.status === 200) {
+      
+      let data = JSON.parse(xhr.response);
+      
+      /**Cuando se carguen mas datos ver como iterar dinamicamente este objeto */
+     document.getElementById("titleProduct").innerText = data[0].title
+     document.getElementById("descriptionProduct").innerText = data[0].description
+
+
+     /**Carga de imagenes */
+     for(let i = 0; i < data[0].picture.length; i ++){
+      console.log(typeof data[0].picture[i] )
+      crearDivImg(data[0].picture[0], "active")
+      crearDivImg(data[0].picture[i + 1]);
+     }
+    
+     
+  }
+};
+xhr.send()
+
+/**creando elementos html para alojar las imagenes */
+const crearDivImg = (url, classNameDiferent) => {
+  let div = document.createElement("div");
+  div.className = "carousel-item"
+  div.className = classNameDiferent
+
+  let img = document.createElement("img");
+  img.src = url
+  img.id = "img-shoos"
+  img.className = "d-block w-100 img-fluid"
+  div.appendChild(img);
+  
+  let carousel = document.getElementsByClassName("carousel-inner")[0];
+
+  carousel.appendChild(div); 
+
+
+}
+
+
 const btnBasket = document.getElementsByClassName("btnBasket")[0];
 let cuentaClicks = 0
 btnBasket.addEventListener("click", (e) => {
@@ -79,25 +126,8 @@ menos.addEventListener("click", (e)=>{
   valor.innerHTML = contador - 1;
 contador--
  
-  console.log(contador)
 })
 
 
-let datos = []
-let xhr = new XMLHttpRequest();
 
-xhr.open("get", "/data.json");
-
-xhr.onreadystatechange = function() {
-  if (xhr.readyState === 4 && xhr.status === 200) {
-      
-      let data = JSON.parse(xhr.response);
-      console.log( data[0].title);
-     document.getElementById("titleProduct").innerText = data[0].title
-     document.getElementById("descriptionProduct").innerText = data[0].description
-
-     
-  }
-};
-xhr.send()
 
