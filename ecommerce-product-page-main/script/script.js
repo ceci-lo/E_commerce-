@@ -15,10 +15,11 @@ xhr.onreadystatechange = function() {
 
 
      /**Carga de imagenes */
+     crearDivImg(data[0].picture[0], " active")
      for(let i = 0; i < data[0].picture.length; i ++){
       console.log(typeof data[0].picture[i] )
-      crearDivImg(data[0].picture[0], "active")
-      crearDivImg(data[0].picture[i + 1]);
+     
+      crearDivImg(data[0].picture[i]);
      }
     
      
@@ -27,10 +28,17 @@ xhr.onreadystatechange = function() {
 xhr.send()
 
 /**creando elementos html para alojar las imagenes */
-const crearDivImg = (url, classNameDiferent) => {
+const crearDivImg = (url, otherClass) => {
   let div = document.createElement("div");
-  div.className = "carousel-item"
-  div.className = classNameDiferent
+  
+   if(otherClass){
+     div.className = "carousel-item" + otherClass;
+   }else{
+     div.className = "carousel-item";
+   }
+ 
+ 
+  
 
   let img = document.createElement("img");
   img.src = url
