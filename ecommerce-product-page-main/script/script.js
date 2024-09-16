@@ -1,5 +1,6 @@
 /**Pedido de datos por ajax */
 let datos = [];
+let titulo = "";
 let xhr = new XMLHttpRequest();
 
 xhr.open("get", "/data.json");
@@ -9,7 +10,9 @@ xhr.onreadystatechange = function () {
     let data = JSON.parse(xhr.response);
 
     /**Cuando se carguen mas datos ver como iterar dinamicamente este objeto */
-    document.getElementById("titleProduct").innerText = data[0].title;
+   document.getElementById("titleProduct").innerText = data[0].title;
+   titulo = data[0].title;
+   console.log(typeof titulo)
     document.getElementById("descriptionProduct").innerText =
       data[0].description;
 
@@ -22,6 +25,7 @@ xhr.onreadystatechange = function () {
     }
   }
 };
+
 xhr.send();
 
 /**creando elementos html para alojar las imagenes */
@@ -48,6 +52,7 @@ const crearDivImg = (url, otherClass) => {
 const btnBasket = document.getElementsByClassName("btnBasket")[0];
 let cuentaClicks = 0;
 
+// boton de carrito
 btnBasket.addEventListener("click", (e) => {
   e.preventDefault();
   e.stopPropagation();
@@ -55,6 +60,23 @@ btnBasket.addEventListener("click", (e) => {
   cuentaClicks++;
 });
 
+const btnAdd = document.getElementById("btnAdd");
+
+//boton de Añadir
+/**
+ * Debe añadir al carrito de compras :
+ * titulo de la compra
+ * precio de la unidad
+ * cantidad
+ * precio total
+ */
+btnAdd.addEventListener("click",(e)=>{
+  e.preventDefault();
+  e.stopPropagation();
+  console.log("agregue ");
+})
+
+//añade la tarjeta carrito
 const addCard = () => {
   let box = document.getElementsByClassName("card")[0];
   if (!box) {
