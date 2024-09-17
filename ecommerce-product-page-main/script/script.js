@@ -1,22 +1,78 @@
 /**Pedido de datos por ajax */
 let datos = [];
 let titulo = "";
-let xhr = new XMLHttpRequest();
 
-xhr.open("get", "/data.json");
 
-xhr.onreadystatechange = function () {
+
+
+
+function makeRequest(method, url) {
+  return new Promise(function (resolve, reject) {
+    let xhr = new XMLHttpRequest();
+
+    xhr.open(method, url);
+
+    xhr.onload = function () {
+      if (xhr.status >= 200 && xhr.status < 300) {
+        console.log(xhr.response);
+        resolve(xhr.response);
+      } else {
+        reject({
+          status: xhr.status,
+          statusText: xhr.statusText
+        });
+      }
+    };
+
+
+    xhr.onerror = function () {
+      reject({
+        status: xhr.status,
+        statusText: xhr.statusText
+      });
+    };
+
+    xhr.send();
+
+  });
+}
+
+makeRequest("GET", "/data.json")
+  .then(function (datums) {
+    console.log(datums);
+    datums = JSON.parse(datums);
+
+    /**Cuando se carguen mas datos ver como iterar dinamicamente este objeto **/
+    document.getElementById("titleProduct").innerText = datums[0].title;
+    titulo = datums[0].title;
+    console.log(titulo);
+    document.getElementById("descriptionProduct").innerText =
+      datums[0].description;
+
+    /**Carga de imagenes **/
+    crearDivImg(datums[0].picture[0], " active");
+    for (let i = 0; i < datums[0].picture.length; i++) {
+      crearDivImg(datums[0].picture[i]);
+    }
+  })
+  .catch(function (err) {
+    console.log(err);
+    console.error("Augh, there was an error!", err.statusText);
+  });
+
+//Reveer funcion 
+/*xhr.onreadystatechange = function () {
   if (xhr.readyState === 4 && xhr.status === 200) {
     let data = JSON.parse(xhr.response);
 
-    /**Cuando se carguen mas datos ver como iterar dinamicamente este objeto */
+    /**Cuando se carguen mas datos ver como iterar dinamicamente este objeto 
    document.getElementById("titleProduct").innerText = data[0].title;
    titulo = data[0].title;
    console.log(typeof titulo)
     document.getElementById("descriptionProduct").innerText =
       data[0].description;
 
-    /**Carga de imagenes */
+    /**Carga de imagenes 
     crearDivImg(data[0].picture[0], " active");
     for (let i = 0; i < data[0].picture.length; i++) {
       console.log(typeof data[0].picture[i]);
@@ -27,7 +83,7 @@ xhr.onreadystatechange = function () {
 };
 
 xhr.send();
-
+*/
 /**creando elementos html para alojar las imagenes */
 const crearDivImg = (url, otherClass) => {
   let div = document.createElement("div");
