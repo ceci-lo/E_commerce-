@@ -1,10 +1,5 @@
 /**Pedido de datos por ajax */
-let datos = [];
-let titulo = "";
-
-
-
-
+let carrito = [];
 
 function makeRequest(method, url) {
   return new Promise(function (resolve, reject) {
@@ -14,7 +9,6 @@ function makeRequest(method, url) {
 
     xhr.onload = function () {
       if (xhr.status >= 200 && xhr.status < 300) {
-        console.log(xhr.response);
         resolve(xhr.response);
       } else {
         reject({
@@ -39,11 +33,13 @@ function makeRequest(method, url) {
 
 makeRequest("GET", "/data.json")
   .then(function (datums) {
-    console.log(datums);
+   
     datums = JSON.parse(datums);
 
     /**Cuando se carguen mas datos ver como iterar dinamicamente este objeto **/
     document.getElementById("titleProduct").innerText = datums[0].title;
+   
+
     titulo = datums[0].title;
     console.log(titulo);
     document.getElementById("descriptionProduct").innerText =
@@ -54,36 +50,15 @@ makeRequest("GET", "/data.json")
     for (let i = 0; i < datums[0].picture.length; i++) {
       crearDivImg(datums[0].picture[i]);
     }
+
+
   })
   .catch(function (err) {
     console.log(err);
     console.error("Augh, there was an error!", err.statusText);
   });
 
-//Reveer funcion 
-/*xhr.onreadystatechange = function () {
-  if (xhr.readyState === 4 && xhr.status === 200) {
-    let data = JSON.parse(xhr.response);
-
-    /**Cuando se carguen mas datos ver como iterar dinamicamente este objeto 
-   document.getElementById("titleProduct").innerText = data[0].title;
-   titulo = data[0].title;
-   console.log(typeof titulo)
-    document.getElementById("descriptionProduct").innerText =
-      data[0].description;
-
-    /**Carga de imagenes 
-    crearDivImg(data[0].picture[0], " active");
-    for (let i = 0; i < data[0].picture.length; i++) {
-      console.log(typeof data[0].picture[i]);
-
-      crearDivImg(data[0].picture[i]);
-    }
-  }
-};
-
-xhr.send();
-*/
+  
 /**creando elementos html para alojar las imagenes */
 const crearDivImg = (url, otherClass) => {
   let div = document.createElement("div");
@@ -129,7 +104,19 @@ const btnAdd = document.getElementById("btnAdd");
 btnAdd.addEventListener("click",(e)=>{
   e.preventDefault();
   e.stopPropagation();
-  console.log("agregue ");
+ 
+  let nombreProducto = document.getElementById('titleProduct').innerText;
+  let precio = document.getElementsByClassName("precioDescontado")[0].innerText;
+  let cantidad = document.getElementsByClassName("value")[0].innerText;
+
+  parseInt(cantidad);
+  parseInt(precio);
+
+  let precioTotal = cantidad * precio;
+
+  carrito.push({"title": nombreProducto, "precio": precio, "cantidad": cantidad, "precioTotal": precioTotal})
+  console.log("precio total",typeof precioTotal)
+
 })
 
 //añade la tarjeta carrito
@@ -161,8 +148,19 @@ const addCard = () => {
 
     let p = document.createElement("p");
     p.className = "card-title text-warning";
-    p.innerText = "Your cart is empty";
-    p.style.textAlign = "center";
+
+    if(carrito[0]){
+      for(let i = 0; i < carrito.length; i++){
+      
+          console.log(carrito[i].title);
+          p.innerText =  `${carrito[i].title} ${carrito[i].precio} x ${carrito[i].cantidad} =  ${carrito[i].precioTotal} `;          
+       
+      }
+     
+    }else {
+      p.innerText = "Your cart is empty";
+      p.style.textAlign = "center";
+    }
 
     bodyCard.appendChild(p);
 
