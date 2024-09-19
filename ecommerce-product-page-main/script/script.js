@@ -108,14 +108,15 @@ btnAdd.addEventListener("click",(e)=>{
   let nombreProducto = document.getElementById('titleProduct').innerText;
   let precio = document.getElementsByClassName("precioDescontado")[0].innerText;
   let cantidad = document.getElementsByClassName("value")[0].innerText;
-
+ let foto = document.getElementById("img-shoos");
+   
   parseInt(cantidad);
   parseInt(precio);
 
   let precioTotal = cantidad * precio;
 
-  carrito.push({"title": nombreProducto, "precio": precio, "cantidad": cantidad, "precioTotal": precioTotal})
-  console.log("precio total",typeof precioTotal)
+  carrito.push({"title": nombreProducto, "precio": precio, "cantidad": cantidad, "precioTotal": precioTotal, "foto": foto})
+  
 
 })
 
@@ -144,26 +145,39 @@ const addCard = () => {
 
     let bodyCard = document.createElement("div");
     bodyCard.className = "card-body";
+    bodyCard.style.display = "flex";
+    bodyCard.style.justifyContent = "start";
+
     caja.appendChild(bodyCard);
 
     let p = document.createElement("p");
     p.className = "card-title text-warning";
+    p.style.fontSize = "15px"
+    minimg = document.createElement("img");
+    trash = document.createElement("img");
 
     if(carrito[0]){
       for(let i = 0; i < carrito.length; i++){
-      
-          console.log(carrito[i].title);
-          p.innerText =  `${carrito[i].title} ${carrito[i].precio} x ${carrito[i].cantidad} =  ${carrito[i].precioTotal} `;          
-       
+          minimg.src = carrito[i].foto.src
+          p.innerText =  `${carrito[i].title} \n ${carrito[i].precio} x ${carrito[i].cantidad} =  ${carrito[i].precioTotal} `;          
+          trash.src = "/ecommerce-product-page-main/images/icon-delete.svg"
       }
      
     }else {
       p.innerText = "Your cart is empty";
       p.style.textAlign = "center";
     }
+    minimg.style.width = "60px";
+    minimg.style.borderRadius = "5px";
+    minimg.style.height= "fit-content";
+    minimg.style.marginRight = "16px";
+    trash.style.width = "20px";
+    trash.style.height = "fit-content";
 
+    bodyCard.appendChild(minimg);
     bodyCard.appendChild(p);
-
+    bodyCard.appendChild(trash);
+    
     let parentDiv = slide.parentNode;
 
     parentDiv.insertBefore(caja, slide);
