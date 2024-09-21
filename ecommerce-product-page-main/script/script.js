@@ -1,33 +1,64 @@
 /**Pedido de datos por ajax */
-let datos = [];
-let titulo = "";
-let xhr = new XMLHttpRequest();
+let carrito = [];
 
-xhr.open("get", "/data.json");
+function makeRequest(method, url) {
+  return new Promise(function (resolve, reject) {
+    let xhr = new XMLHttpRequest();
 
-xhr.onreadystatechange = function () {
-  if (xhr.readyState === 4 && xhr.status === 200) {
-    let data = JSON.parse(xhr.response);
+    xhr.open(method, url);
 
-    /**Cuando se carguen mas datos ver como iterar dinamicamente este objeto */
-   document.getElementById("titleProduct").innerText = data[0].title;
-   titulo = data[0].title;
-   console.log(typeof titulo)
+    xhr.onload = function () {
+      if (xhr.status >= 200 && xhr.status < 300) {
+        resolve(xhr.response);
+      } else {
+        reject({
+          status: xhr.status,
+          statusText: xhr.statusText
+        });
+      }
+    };
+
+
+    xhr.onerror = function () {
+      reject({
+        status: xhr.status,
+        statusText: xhr.statusText
+      });
+    };
+
+    xhr.send();
+
+  });
+}
+
+makeRequest("GET", "/data.json")
+  .then(function (datums) {
+   
+    datums = JSON.parse(datums);
+
+    /**Cuando se carguen mas datos ver como iterar dinamicamente este objeto **/
+    document.getElementById("titleProduct").innerText = datums[0].title;
+   
+
+    titulo = datums[0].title;
+    console.log(titulo);
     document.getElementById("descriptionProduct").innerText =
-      data[0].description;
+      datums[0].description;
 
-    /**Carga de imagenes */
-    crearDivImg(data[0].picture[0], " active");
-    for (let i = 0; i < data[0].picture.length; i++) {
-      console.log(typeof data[0].picture[i]);
-
-      crearDivImg(data[0].picture[i]);
+    /**Carga de imagenes **/
+    crearDivImg(datums[0].picture[0], " active");
+    for (let i = 0; i < datums[0].picture.length; i++) {
+      crearDivImg(datums[0].picture[i]);
     }
-  }
-};
 
-xhr.send();
 
+  })
+  .catch(function (err) {
+    console.log(err);
+    console.error("Augh, there was an error!", err.statusText);
+  });
+
+  
 /**creando elementos html para alojar las imagenes */
 const crearDivImg = (url, otherClass) => {
   let div = document.createElement("div");
@@ -73,13 +104,46 @@ const btnAdd = document.getElementById("btnAdd");
 btnAdd.addEventListener("click",(e)=>{
   e.preventDefault();
   e.stopPropagation();
-  console.log("agregue ");
+ 
+  let nombreProducto = document.getElementById('titleProduct').innerText;
+  let precio = document.getElementsByClassName("precioDescontado")[0].innerText;
+  let cantidad = document.getElementsByClassName("value")[0].innerText;
+ let foto = document.getElementById("img-shoos");
+ let basketIcon =document.getElementsByClassName("container-nav-avatar")[0];
+
+
+ circulo = document.createElement("div");
+ circulo.className = "bg-secondary";
+ basketIcon.style.position = "relative";
+
+  parseInt(cantidad);
+  parseInt(precio);
+
+  let precioTotal = cantidad * precio;
+
+  carrito.push({"title": nombreProducto, "precio": precio, "cantidad": cantidad, "precioTotal": precioTotal, "foto": foto})
+  
+  //circulo.style.border = "solid orange";   
+  circulo.style.borderRadius = "50%";   
+  circulo.style.color ="white";
+  circulo.style.width = "20px";
+  circulo.style.height = "18px";
+  circulo.style.position = "absolute";
+  circulo.style.top = "-7px";
+  circulo.style.right = "57px";
+  circulo.innerText = cantidad;
+  circulo.style.textAlign= "center";
+  circulo.style.fontSize= "12px";
+  basketIcon.appendChild(circulo);
+
 })
 
 //añade la tarjeta carrito
 const addCard = () => {
   let box = document.getElementsByClassName("card")[0];
   if (!box) {
+
+
     let caja = document.createElement("div");
     caja.className = "card";
     caja.style.position = "absolute";
@@ -101,14 +165,43 @@ const addCard = () => {
 
     let bodyCard = document.createElement("div");
     bodyCard.className = "card-body";
+    bodyCard.style.display = "flex";
+    bodyCard.style.justifyContent = "start";
+
     caja.appendChild(bodyCard);
 
     let p = document.createElement("p");
     p.className = "card-title text-warning";
-    p.innerText = "Your cart is empty";
-    p.style.textAlign = "center";
+    p.style.fontSize = "15px"
+    minimg = document.createElement("img");
+    trash = document.createElement("img");
 
+  
+    if(carrito[0]){
+      for(let i = 0; i < carrito.length; i++){
+
+          minimg.src = carrito[i].foto.src
+          p.innerText =  `${carrito[i].title} \n ${carrito[i].precio} x ${carrito[i].cantidad} =  ${carrito[i].precioTotal} `;    
+          trash.src = "/ecommerce-product-page-main/images/icon-delete.svg"
+      }
+     
+    }else {
+      p.innerText = "Your cart is empty";
+      p.style.textAlign = "center";
+    }
+    minimg.style.width = "60px";
+    minimg.style.borderRadius = "5px";
+    minimg.style.height= "fit-content";
+    minimg.style.marginRight = "16px";
+    trash.style.width = "20px";
+    trash.style.height = "fit-content";
+    trash.style.marginLeft = "5px";
+
+    bodyCard.appendChild(minimg);
     bodyCard.appendChild(p);
+    bodyCard.appendChild(trash);
+    
+ 
 
     let parentDiv = slide.parentNode;
 
