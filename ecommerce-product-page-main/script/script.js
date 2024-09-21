@@ -109,7 +109,13 @@ btnAdd.addEventListener("click",(e)=>{
   let precio = document.getElementsByClassName("precioDescontado")[0].innerText;
   let cantidad = document.getElementsByClassName("value")[0].innerText;
  let foto = document.getElementById("img-shoos");
-   
+ let basketIcon =document.getElementsByClassName("container-nav-avatar")[0];
+
+
+ circulo = document.createElement("div");
+ circulo.className = "bg-secondary";
+ basketIcon.style.position = "relative";
+
   parseInt(cantidad);
   parseInt(precio);
 
@@ -117,6 +123,18 @@ btnAdd.addEventListener("click",(e)=>{
 
   carrito.push({"title": nombreProducto, "precio": precio, "cantidad": cantidad, "precioTotal": precioTotal, "foto": foto})
   
+  //circulo.style.border = "solid orange";   
+  circulo.style.borderRadius = "50%";   
+  circulo.style.color ="white";
+  circulo.style.width = "20px";
+  circulo.style.height = "18px";
+  circulo.style.position = "absolute";
+  circulo.style.top = "-7px";
+  circulo.style.right = "57px";
+  circulo.innerText = cantidad;
+  circulo.style.textAlign= "center";
+  circulo.style.fontSize= "12px";
+  basketIcon.appendChild(circulo);
 
 })
 
@@ -124,7 +142,7 @@ btnAdd.addEventListener("click",(e)=>{
 const addCard = () => {
   let box = document.getElementsByClassName("card")[0];
   if (!box) {
-    let basketIcon =document.getElementsByClassName("container-nav-avatar")[0];
+
 
     let caja = document.createElement("div");
     caja.className = "card";
@@ -158,26 +176,12 @@ const addCard = () => {
     minimg = document.createElement("img");
     trash = document.createElement("img");
 
-    circulo = document.createElement("div");
-    circulo.className = "bg-secondary";
-    basketIcon.style.position = "relative"
+  
     if(carrito[0]){
       for(let i = 0; i < carrito.length; i++){
 
           minimg.src = carrito[i].foto.src
           p.innerText =  `${carrito[i].title} \n ${carrito[i].precio} x ${carrito[i].cantidad} =  ${carrito[i].precioTotal} `;    
-          circulo.style.border = "solid orange";   
-          circulo.style.borderRadius = "50%";   
-          circulo.style.color ="white";
-          circulo.style.width = "20px";
-          circulo.style.height = "20px";
-          circulo.style.position = "absolute";
-          circulo.style.top = "-7px";
-          circulo.style.right = "57px";
-
-
-
-
           trash.src = "/ecommerce-product-page-main/images/icon-delete.svg"
       }
      
@@ -197,7 +201,7 @@ const addCard = () => {
     bodyCard.appendChild(p);
     bodyCard.appendChild(trash);
     
-    basketIcon.appendChild(circulo);
+ 
 
     let parentDiv = slide.parentNode;
 
