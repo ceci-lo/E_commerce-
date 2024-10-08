@@ -150,19 +150,23 @@ btnAdd.addEventListener("click", (e) => {
 });
 
 let actualProduct = () => {};
-let btnDelete = document.getElementsByClassName("deleteButton")[0];
+
 
 let padre = document.getElementsByClassName("card")[0];
 let hijo = document.getElementsByClassName("card-body")[0];
 let hijo2 = document.getElementsByClassName("btnCheckout")[0];
 
+
+
+
+
 //Elimina producto del carrito
 let deleteProduct = () => {
-  if (padre) {
+  
     console.log("estoy en delete");
     padre.removeChild(hijo);
     padre.removeChild(hijo2);
-  }
+ 
 };
 
 //añade la tarjeta carrito
@@ -200,7 +204,7 @@ const addCard = () => {
     p.style.fontSize = "15px";
     minimg = document.createElement("img");
     let trash = document.createElement("img");
-    let trashLink = document.createElement("a");
+    let trashLink = document.createElement("span");
     let button = document.createElement("button");
     button.className = "btn btn-secondary btnCheckout";
     button.innerText = "Checkout";
@@ -212,13 +216,24 @@ const addCard = () => {
 
         p.innerText = `${bascket[i].title} \n ${bascket[i].precio} x ${bascket[i].cantidad}  $${bascket[i].precioTotal}`;
         trash.src = "/ecommerce-product-page-main/images/icon-delete.svg";
+
         console.log("productoID", carrito[0][i].id);
+
+        //elimina el carrito
+    let btnDelete = document.getElementsByClassName("deleteButton")[0];
+    console.log("BTN", btnDelete)
+      btnDelete.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log("Elimino")
+        deleteProduct();
+      }); 
       }
     } else {
       p.innerText = "Your cart is empty";
       p.style.textAlign = "center";
     }
-
+   
     minimg.style.width = "60px";
     minimg.style.borderRadius = "5px";
     minimg.style.height = "fit-content";
@@ -240,6 +255,7 @@ const addCard = () => {
     bodyCard.appendChild(trashLink);
     caja.appendChild(button);
 
+      
     let parentDiv = slide.parentNode;
 
     parentDiv.insertBefore(caja, slide);
