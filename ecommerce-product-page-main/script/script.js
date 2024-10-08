@@ -14,61 +14,53 @@ function makeRequest(method, url) {
       } else {
         reject({
           status: xhr.status,
-          statusText: xhr.statusText
+          statusText: xhr.statusText,
         });
       }
     };
 
-
     xhr.onerror = function () {
       reject({
         status: xhr.status,
-        statusText: xhr.statusText
+        statusText: xhr.statusText,
       });
     };
 
     xhr.send();
-
   });
 }
 
 makeRequest("GET", "/data.json")
   .then(function (datums) {
-   
     datums = JSON.parse(datums);
     carrito.push(datums);
 
-    let titulo =   document.getElementById("titleProduct");
-    let description =  document.getElementById("descriptionProduct");
-    let price =  document.getElementById("precio");
+    let titulo = document.getElementById("titleProduct");
+    let description = document.getElementById("descriptionProduct");
+    let price = document.getElementById("precio");
 
     /**Cuando se carguen mas datos ver como iterar dinamicamente este objeto **/
     for (let i = 0; i < carrito.length; i++) {
-      for(let j = 0; j <carrito.length; j++){
-      console.log(carrito[i][j].title)
-      titulo.innerText = carrito[i][j].title;
-      
-      description.innerText = carrito[i][j].description;
-      price.innerText = "$"+carrito[i][j].price;
-      }
+      for (let j = 0; j < carrito.length; j++) {
+        console.log(carrito[i][j].title);
+        titulo.innerText = carrito[i][j].title;
 
+        description.innerText = carrito[i][j].description;
+        price.innerText = "$" + carrito[i][j].price;
+      }
     }
 
-   
     /**Carga de imagenes **/
     crearDivImg(datums[0].picture[0], " active");
     for (let i = 0; i < datums[0].picture.length; i++) {
       crearDivImg(datums[0].picture[i]);
     }
-
-
   })
   .catch(function (err) {
     console.log(err);
     console.error("Augh, there was an error!", err.statusText);
   });
 
-  
 /**creando elementos html para alojar las imagenes */
 const crearDivImg = (url, otherClass) => {
   let div = document.createElement("div");
@@ -112,68 +104,66 @@ const btnAdd = document.getElementById("btnAdd");
  * precio total
  */
 
-btnAdd.addEventListener("click",(e)=>{
+btnAdd.addEventListener("click", (e) => {
   e.preventDefault();
   e.stopPropagation();
 
-  let nombreProducto ;
-  for(let j =0 ; j < carrito.length; j++){
-  for (let i = 0; i < carrito.length; i++) {
-     nombreProducto = carrito[j][i].title;
-   
+  let nombreProducto;
+  for (let j = 0; j < carrito.length; j++) {
+    for (let i = 0; i < carrito.length; i++) {
+      nombreProducto = carrito[j][i].title;
+    }
   }
-}
- circulo = document.createElement("div");
- circulo.className = "bg-secondary";
+  circulo = document.createElement("div");
+  circulo.className = "bg-secondary";
   let precio = document.getElementsByClassName("precioDescontado")[0].innerText;
   let cantidad = document.getElementsByClassName("value")[0].innerText;
   let foto = document.getElementById("img-shoos");
- let basketIcon =document.getElementsByClassName("container-nav-avatar")[0];
- basketIcon.style.position = "relative";
+  let basketIcon = document.getElementsByClassName("container-nav-avatar")[0];
+  basketIcon.style.position = "relative";
 
   parseInt(cantidad);
   parseInt(precio);
 
   let precioTotal = cantidad * precio;
 
-  bascket.push({"id": 1,"title": nombreProducto, "precio": precio, "cantidad": cantidad, "precioTotal": precioTotal, "foto": foto})
-  
-    
-  circulo.style.borderRadius = "50%";   
-  circulo.style.color ="white";
+  bascket.push({
+    id: 1,
+    title: nombreProducto,
+    precio: precio,
+    cantidad: cantidad,
+    precioTotal: precioTotal,
+    foto: foto,
+  });
+
+  circulo.style.borderRadius = "50%";
+  circulo.style.color = "white";
   circulo.style.width = "20px";
   circulo.style.height = "18px";
   circulo.style.position = "absolute";
   circulo.style.top = "-7px";
   circulo.style.right = "57px";
-//  circulo.innerText = cantidad;
-  circulo.style.textAlign= "center";
-  circulo.style.fontSize= "12px";
+  //  circulo.innerText = cantidad;
+  circulo.style.textAlign = "center";
+  circulo.style.fontSize = "12px";
   basketIcon.appendChild(circulo);
+});
 
-})
-
-let actualProduct = () => {
-
-
-}
-let  btnDelete = document.getElementsByClassName("deleteButton")[0];
+let actualProduct = () => {};
+let btnDelete = document.getElementsByClassName("deleteButton")[0];
 
 let padre = document.getElementsByClassName("card")[0];
 let hijo = document.getElementsByClassName("card-body")[0];
 let hijo2 = document.getElementsByClassName("btnCheckout")[0];
 
- //Elimina producto del carrito
- let deleteProduct = () => {
-  if(padre){
-   
-      console.log("estoy en delete")
-      padre.removeChild(hijo);
-      padre.removeChild(hijo2);
+//Elimina producto del carrito
+let deleteProduct = () => {
+  if (padre) {
+    console.log("estoy en delete");
+    padre.removeChild(hijo);
+    padre.removeChild(hijo2);
   }
-
- }
-
+};
 
 //añade la tarjeta carrito
 const addCard = () => {
@@ -207,60 +197,54 @@ const addCard = () => {
 
     let p = document.createElement("p");
     p.className = "card-title text-warning";
-    p.style.fontSize = "15px"
+    p.style.fontSize = "15px";
     minimg = document.createElement("img");
     let trash = document.createElement("img");
     let trashLink = document.createElement("a");
     let button = document.createElement("button");
     button.className = "btn btn-secondary btnCheckout";
     button.innerText = "Checkout";
-console.log("carrito ",carrito[0][0]);
-    if(carrito[0]){
-        
-      for(let i = 0; i < carrito.length; i++){
-        
-          minimg.src = carrito[0][i].picture[i];
-          
-          p.innerText =  `${bascket[i].title} \n ${bascket[i].precio} x ${bascket[i].cantidad} =  ${bascket[i].precioTotal} `;    
-          trash.src = "/ecommerce-product-page-main/images/icon-delete.svg"
-          console.log("productoID", carrito[0][i].id);
+
+    //carga el carrito 
+    if (bascket[0]) {
+      for (let i = 0; i < carrito.length; i++) {
+        minimg.src = carrito[0][i].picture[i];
+
+        p.innerText = `${bascket[i].title} \n ${bascket[i].precio} x ${bascket[i].cantidad}  $${bascket[i].precioTotal}`;
+        trash.src = "/ecommerce-product-page-main/images/icon-delete.svg";
+        console.log("productoID", carrito[0][i].id);
       }
-     
-    }else {
+    } else {
       p.innerText = "Your cart is empty";
       p.style.textAlign = "center";
     }
 
-
     minimg.style.width = "60px";
     minimg.style.borderRadius = "5px";
-    minimg.style.height= "fit-content";
+    minimg.style.height = "fit-content";
     minimg.style.marginRight = "16px";
 
     trash.style.width = "20px";
     trash.style.height = "fit-content";
     trash.style.marginLeft = "5px";
 
-    trashLink.className="deleteButton";
+    trashLink.className = "deleteButton";
     trashLink.appendChild(trash);
-    
-    button.style.width = "90%";
-    button.style.padding= "3% 0 3% 0";
-    button.style.margin = "15px";
 
+    button.style.width = "90%";
+    button.style.padding = "3% 0 3% 0";
+    button.style.margin = "15px";
 
     bodyCard.appendChild(minimg);
     bodyCard.appendChild(p);
     bodyCard.appendChild(trashLink);
     caja.appendChild(button);
- 
 
     let parentDiv = slide.parentNode;
 
     parentDiv.insertBefore(caja, slide);
   } else {
     box.remove();
-    
   }
 };
 
