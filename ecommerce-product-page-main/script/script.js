@@ -1,5 +1,6 @@
 /**Pedido de datos por ajax */
 let carrito = [];
+let bascket = [];
 
 function makeRequest(method, url) {
   return new Promise(function (resolve, reject) {
@@ -35,22 +36,25 @@ makeRequest("GET", "/data.json")
   .then(function (datums) {
    
     datums = JSON.parse(datums);
-    carrito = datums;
+    carrito.push(datums);
 
-    let titulo =   document.getElementById("titleProduct").innerText;
-    let description =  document.getElementById("descriptionProduct").innerText;
-    let price =  document.getElementById("precio").innerText;
+    let titulo =   document.getElementById("titleProduct");
+    let description =  document.getElementById("descriptionProduct");
+    let price =  document.getElementById("precio");
 
     /**Cuando se carguen mas datos ver como iterar dinamicamente este objeto **/
     for (let i = 0; i < carrito.length; i++) {
-      console.log(carrito[i].title)
-      titulo = carrito[i].title;
-      description = carrito[i].description;
-      price = "$"+carrito[i].price;
+      for(let j = 0; j <carrito.length; j++){
+      console.log(carrito[i][j].title)
+      titulo.innerText = carrito[i][j].title;
+      
+      description.innerText = carrito[i][j].description;
+      price.innerText = "$"+carrito[i][j].price;
+      }
 
     }
 
-    
+   
     /**Carga de imagenes **/
     crearDivImg(datums[0].picture[0], " active");
     for (let i = 0; i < datums[0].picture.length; i++) {
@@ -113,20 +117,18 @@ btnAdd.addEventListener("click",(e)=>{
   e.stopPropagation();
 
   let nombreProducto ;
+  for(let j =0 ; j < carrito.length; j++){
   for (let i = 0; i < carrito.length; i++) {
-    let nombreProducto = carrito[i].title;
-    console.log("titulo", nombreProducto)
+     nombreProducto = carrito[j][i].title;
+   
   }
+}
  circulo = document.createElement("div");
  circulo.className = "bg-secondary";
-  
- /* let precio = document.getElementsByClassName("precioDescontado")[0].innerText;
+  let precio = document.getElementsByClassName("precioDescontado")[0].innerText;
   let cantidad = document.getElementsByClassName("value")[0].innerText;
- let foto = document.getElementById("img-shoos");
+  let foto = document.getElementById("img-shoos");
  let basketIcon =document.getElementsByClassName("container-nav-avatar")[0];
-
-
- 
  basketIcon.style.position = "relative";
 
   parseInt(cantidad);
@@ -134,9 +136,9 @@ btnAdd.addEventListener("click",(e)=>{
 
   let precioTotal = cantidad * precio;
 
-  carrito.push({"id": 1,"title": nombreProducto, "precio": precio, "cantidad": cantidad, "precioTotal": precioTotal, "foto": foto})
+  bascket.push({"id": 1,"title": nombreProducto, "precio": precio, "cantidad": cantidad, "precioTotal": precioTotal, "foto": foto})
   
-     */
+    
   circulo.style.borderRadius = "50%";   
   circulo.style.color ="white";
   circulo.style.width = "20px";
@@ -212,14 +214,16 @@ const addCard = () => {
     let button = document.createElement("button");
     button.className = "btn btn-secondary btnCheckout";
     button.innerText = "Checkout";
-
+console.log("carrito ",carrito[0][0]);
     if(carrito[0]){
+        
       for(let i = 0; i < carrito.length; i++){
-
-          minimg.src = carrito[i].foto.src
-          p.innerText =  `${carrito[i].title} \n ${carrito[i].precio} x ${carrito[i].cantidad} =  ${carrito[i].precioTotal} `;    
+        
+          minimg.src = carrito[0][i].picture[i];
+          
+          p.innerText =  `${bascket[i].title} \n ${bascket[i].precio} x ${bascket[i].cantidad} =  ${bascket[i].precioTotal} `;    
           trash.src = "/ecommerce-product-page-main/images/icon-delete.svg"
-          console.log("productoID", carrito[i].id);
+          console.log("productoID", carrito[0][i].id);
       }
      
     }else {
