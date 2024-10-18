@@ -1,5 +1,6 @@
 /**Pedido de datos por ajax */
 let carrito = [];
+let bascket = [];
 
 function makeRequest(method, url) {
   return new Promise(function (resolve, reject) {
@@ -13,52 +14,51 @@ function makeRequest(method, url) {
       } else {
         reject({
           status: xhr.status,
-          statusText: xhr.statusText
+          statusText: xhr.statusText,
         });
       }
     };
 
-
     xhr.onerror = function () {
       reject({
         status: xhr.status,
-        statusText: xhr.statusText
+        statusText: xhr.statusText,
       });
     };
 
     xhr.send();
-
   });
 }
 
 makeRequest("GET", "/data.json")
   .then(function (datums) {
-   
     datums = JSON.parse(datums);
+    carrito.push(datums);
+
+    let titulo = document.getElementById("titleProduct");
+    let description = document.getElementById("descriptionProduct");
+    let price = document.getElementById("precio");
 
     /**Cuando se carguen mas datos ver como iterar dinamicamente este objeto **/
-    document.getElementById("titleProduct").innerText = datums[0].title;
-   
-
-    titulo = datums[0].title;
-    console.log(titulo);
-    document.getElementById("descriptionProduct").innerText =
-      datums[0].description;
-
+   for (let i = 0; i < carrito.length; i++) {
+    
+      carrito[i].map((producto) => titulo.innerText = producto.title)
+      carrito[i].map((producto) => description.innerText = producto.description)
+      carrito[i].map((producto) => price.innerText = producto.price)
+    }
+ 
     /**Carga de imagenes **/
     crearDivImg(datums[0].picture[0], " active");
     for (let i = 0; i < datums[0].picture.length; i++) {
       crearDivImg(datums[0].picture[i]);
     }
-
-
   })
   .catch(function (err) {
     console.log(err);
     console.error("Augh, there was an error!", err.statusText);
   });
 
-  
+
 /**creando elementos html para alojar las imagenes */
 const crearDivImg = (url, otherClass) => {
   let div = document.createElement("div");
@@ -101,49 +101,77 @@ const btnAdd = document.getElementById("btnAdd");
  * cantidad
  * precio total
  */
-btnAdd.addEventListener("click",(e)=>{
+
+btnAdd.addEventListener("click", (e) => {
   e.preventDefault();
   e.stopPropagation();
- 
-  let nombreProducto = document.getElementById('titleProduct').innerText;
+
+  let nombreProducto;
+  for (let j = 0; j < carrito.length; j++) {
+    for (let i = 0; i < carrito.length; i++) {
+      nombreProducto = carrito[j][i].title;
+    }
+  }
+  circulo = document.createElement("div");
+  circulo.className = "bg-secondary";
   let precio = document.getElementsByClassName("precioDescontado")[0].innerText;
   let cantidad = document.getElementsByClassName("value")[0].innerText;
- let foto = document.getElementById("img-shoos");
- let basketIcon =document.getElementsByClassName("container-nav-avatar")[0];
-
-
- circulo = document.createElement("div");
- circulo.className = "bg-secondary";
- basketIcon.style.position = "relative";
+  let foto = document.getElementById("img-shoos");
+  let basketIcon = document.getElementsByClassName("container-nav-avatar")[0];
+  basketIcon.style.position = "relative";
 
   parseInt(cantidad);
   parseInt(precio);
 
   let precioTotal = cantidad * precio;
 
-  carrito.push({"title": nombreProducto, "precio": precio, "cantidad": cantidad, "precioTotal": precioTotal, "foto": foto})
-  
-  //circulo.style.border = "solid orange";   
-  circulo.style.borderRadius = "50%";   
-  circulo.style.color ="white";
+  bascket.push({
+    id: 1,
+    title: nombreProducto,
+    precio: precio,
+    cantidad: cantidad,
+    precioTotal: precioTotal,
+    foto: foto,
+  });
+
+  circulo.style.borderRadius = "50%";
+  circulo.style.color = "white";
   circulo.style.width = "20px";
   circulo.style.height = "18px";
   circulo.style.position = "absolute";
   circulo.style.top = "-7px";
   circulo.style.right = "57px";
-  circulo.innerText = cantidad;
-  circulo.style.textAlign= "center";
-  circulo.style.fontSize= "12px";
+  //  circulo.innerText = cantidad;
+  circulo.style.textAlign = "center";
+  circulo.style.fontSize = "12px";
   basketIcon.appendChild(circulo);
+});
 
-})
+let actualProduct = () => {};
+
+
+
+
+
+
+
+
+//Elimina producto del carrito
+let deleteProduct = (idProducto) => {
+  //let padre = document.getElementsByClassName("card")[0];
+let hijo = document.getElementsByClassName("card-body")[0];
+//let hijo2 = document.getElementsByClassName("btnCheckout")[0];
+ for (const ele of bascket) {
+  if(idProducto == ele.id){
+    hijo.remove();
+  }
+ } 
+};
 
 //añade la tarjeta carrito
 const addCard = () => {
   let box = document.getElementsByClassName("card")[0];
   if (!box) {
-
-
     let caja = document.createElement("div");
     caja.className = "card";
     caja.style.position = "absolute";
@@ -172,46 +200,66 @@ const addCard = () => {
 
     let p = document.createElement("p");
     p.className = "card-title text-warning";
-    p.style.fontSize = "15px"
+    p.style.fontSize = "15px";
     minimg = document.createElement("img");
-    trash = document.createElement("img");
+    let trash = document.createElement("img");
+    let trashLink = document.createElement("span");
+    let button = document.createElement("button");
+    button.className = "btn btn-secondary btnCheckout";
+    button.innerText = "Checkout";
 
-  
-    if(carrito[0]){
-      for(let i = 0; i < carrito.length; i++){
+    //carga el carrito 
+    if (bascket[0]) {
+      for (let i = 0; i < carrito.length; i++) {
+        minimg.src = carrito[0][i].picture[i];
 
-          minimg.src = carrito[i].foto.src
-          p.innerText =  `${carrito[i].title} \n ${carrito[i].precio} x ${carrito[i].cantidad} =  ${carrito[i].precioTotal} `;    
-          trash.src = "/ecommerce-product-page-main/images/icon-delete.svg"
+        p.innerText = `${bascket[i].title} \n ${bascket[i].precio} x ${bascket[i].cantidad}  $${bascket[i].precioTotal}`;
+        trash.src = "/ecommerce-product-page-main/images/icon-delete.svg";
+
+       
       }
-     
-    }else {
+    } else {
       p.innerText = "Your cart is empty";
       p.style.textAlign = "center";
     }
+   
     minimg.style.width = "60px";
     minimg.style.borderRadius = "5px";
-    minimg.style.height= "fit-content";
+    minimg.style.height = "fit-content";
     minimg.style.marginRight = "16px";
+
     trash.style.width = "20px";
     trash.style.height = "fit-content";
     trash.style.marginLeft = "5px";
 
+    trashLink.className = "deleteButton";
+    trashLink.appendChild(trash);
+
+    button.style.width = "90%";
+    button.style.padding = "3% 0 3% 0";
+    button.style.margin = "15px";
+
     bodyCard.appendChild(minimg);
     bodyCard.appendChild(p);
-    bodyCard.appendChild(trash);
-    
- 
+    bodyCard.appendChild(trashLink);
+    caja.appendChild(button);
 
+      
     let parentDiv = slide.parentNode;
 
     parentDiv.insertBefore(caja, slide);
   } else {
     box.remove();
-    console.log("entre al if");
   }
 };
+ 
+/* btnDelete.addEventListener("click", (e)=>{
 
+  e.preventDefault();
+  e.stopPropagation();
+  deleteProduct();
+});
+ */
 let menos = document.getElementsByClassName("minus")[0];
 let mas = document.getElementById("plus");
 let valor = document.getElementsByClassName("value")[0];
