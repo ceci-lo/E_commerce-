@@ -40,16 +40,13 @@ makeRequest("GET", "/data.json")
     let price = document.getElementById("precio");
 
     /**Cuando se carguen mas datos ver como iterar dinamicamente este objeto **/
-    for (let i = 0; i < carrito.length; i++) {
-      for (let j = 0; j < carrito.length; j++) {
-        console.log(carrito[i][j].title);
-        titulo.innerText = carrito[i][j].title;
-
-        description.innerText = carrito[i][j].description;
-        price.innerText = "$" + carrito[i][j].price;
-      }
+   for (let i = 0; i < carrito.length; i++) {
+    
+      carrito[i].map((producto) => titulo.innerText = producto.title)
+      carrito[i].map((producto) => description.innerText = producto.description)
+      carrito[i].map((producto) => price.innerText = producto.price)
     }
-
+ 
     /**Carga de imagenes **/
     crearDivImg(datums[0].picture[0], " active");
     for (let i = 0; i < datums[0].picture.length; i++) {
@@ -60,6 +57,7 @@ makeRequest("GET", "/data.json")
     console.log(err);
     console.error("Augh, there was an error!", err.statusText);
   });
+
 
 /**creando elementos html para alojar las imagenes */
 const crearDivImg = (url, otherClass) => {
@@ -152,21 +150,22 @@ btnAdd.addEventListener("click", (e) => {
 let actualProduct = () => {};
 
 
-let padre = document.getElementsByClassName("card")[0];
-let hijo = document.getElementsByClassName("card-body")[0];
-let hijo2 = document.getElementsByClassName("btnCheckout")[0];
+
 
 
 
 
 
 //Elimina producto del carrito
-let deleteProduct = () => {
-  
-    console.log("estoy en delete");
-    padre.removeChild(hijo);
-    padre.removeChild(hijo2);
- 
+let deleteProduct = (idProducto) => {
+  //let padre = document.getElementsByClassName("card")[0];
+let hijo = document.getElementsByClassName("card-body")[0];
+//let hijo2 = document.getElementsByClassName("btnCheckout")[0];
+ for (const ele of bascket) {
+  if(idProducto == ele.id){
+    hijo.remove();
+  }
+ } 
 };
 
 //añade la tarjeta carrito
@@ -217,17 +216,7 @@ const addCard = () => {
         p.innerText = `${bascket[i].title} \n ${bascket[i].precio} x ${bascket[i].cantidad}  $${bascket[i].precioTotal}`;
         trash.src = "/ecommerce-product-page-main/images/icon-delete.svg";
 
-        console.log("productoID", carrito[0][i].id);
-
-        //elimina el carrito
-    let btnDelete = document.getElementsByClassName("deleteButton")[0];
-    console.log("BTN", btnDelete)
-      btnDelete.addEventListener("click", (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        console.log("Elimino")
-        deleteProduct();
-      }); 
+       
       }
     } else {
       p.innerText = "Your cart is empty";
@@ -263,7 +252,7 @@ const addCard = () => {
     box.remove();
   }
 };
-
+ 
 /* btnDelete.addEventListener("click", (e)=>{
 
   e.preventDefault();
