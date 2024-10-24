@@ -149,7 +149,6 @@ btnAdd.addEventListener("click", (e) => {
   basketIcon.appendChild(circulo);
 });
 
-let actualProduct = () => {};
 
 //Elimina producto del carrito
 let deleteProduct = () => {
@@ -164,19 +163,29 @@ let deleteProduct = () => {
         let indice = bascket.findIndex((obj) => obj.id === product.id);
       let hijo = document.getElementsByClassName("card-body")[0];
       let circulo = document.getElementsByClassName("conteo")[0];
-
+        let btnCheckout = document.getElementsByClassName("btnCheckout")[0];
       bascket.splice(indice, 1);
         
         hijo.remove();
-        if(bascket.length==0) circulo.remove();
+        if(bascket.length==0) {
+          circulo.remove();
+          btnCheckout.remove();
+         let p = document.createElement("p");
+          let bodyCard =document.createElement("div");
+          let card = document.getElementsByClassName("card")[0];
+           p.innerText = "Your cart is empty.";
+           p.style.textAlign = "center";
+           p.className = "card-title text-warning";
+           p.style.fontSize = "15px";
+            card.appendChild(bodyCard);
+            bodyCard.appendChild(p);
+
+        }
         
       }
      
     });
-  }else{
-    p.innerText = "Your cart is empty";
-      p.style.textAlign = "center";
-    }
+  }
   
 };
 
