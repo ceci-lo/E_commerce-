@@ -40,13 +40,14 @@ makeRequest("GET", "/data.json")
     let price = document.getElementById("precio");
 
     /**Cuando se carguen mas datos ver como iterar dinamicamente este objeto **/
-   for (let i = 0; i < carrito.length; i++) {
-    
-      carrito[i].map((producto) => titulo.innerText = producto.title)
-      carrito[i].map((producto) => description.innerText = producto.description)
-      carrito[i].map((producto) => price.innerText = producto.price)
+    for (let i = 0; i < carrito.length; i++) {
+      carrito[i].map((producto) => (titulo.innerText = producto.title));
+      carrito[i].map(
+        (producto) => (description.innerText = producto.description)
+      );
+      carrito[i].map((producto) => (price.innerText = producto.price));
     }
- 
+
     /**Carga de imagenes **/
     crearDivImg(datums[0].picture[0], " active");
     for (let i = 0; i < datums[0].picture.length; i++) {
@@ -57,7 +58,6 @@ makeRequest("GET", "/data.json")
     console.log(err);
     console.error("Augh, there was an error!", err.statusText);
   });
-
 
 /**creando elementos html para alojar las imagenes */
 const crearDivImg = (url, otherClass) => {
@@ -88,6 +88,30 @@ btnBasket.addEventListener("click", (e) => {
   e.preventDefault();
   e.stopPropagation();
   addCard();
+
+  //Delete Product
+  let deleteBoton = document.getElementsByClassName("deleteButton")[0];
+
+  if (bascket.length >= 1) {
+    console.log("backet", bascket);
+    deleteBoton.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      for (const product of bascket) {
+        let indice = bascket.findIndex((obj) => obj.id === product.id);
+
+        bascket.splice(indice, 1);
+        let hijo = document.getElementsByClassName("card-body")[0];
+        hijo.remove();
+      }
+      console.log("backet", bascket);
+    });
+  }else{
+    p.innerText = "Your cart is empty";
+      p.style.textAlign = "center";
+    }
+  
+
   cuentaClicks++;
 });
 
@@ -134,6 +158,7 @@ btnAdd.addEventListener("click", (e) => {
     foto: foto,
   });
 
+  //circulo de conteo de productos
   circulo.style.borderRadius = "50%";
   circulo.style.color = "white";
   circulo.style.width = "20px";
@@ -141,7 +166,7 @@ btnAdd.addEventListener("click", (e) => {
   circulo.style.position = "absolute";
   circulo.style.top = "-7px";
   circulo.style.right = "57px";
-  //  circulo.innerText = cantidad;
+  circulo.innerText = cantidad;
   circulo.style.textAlign = "center";
   circulo.style.fontSize = "12px";
   basketIcon.appendChild(circulo);
@@ -149,23 +174,11 @@ btnAdd.addEventListener("click", (e) => {
 
 let actualProduct = () => {};
 
-
-
-
-
-
-
-
 //Elimina producto del carrito
-let deleteProduct = (idProducto) => {
-  //let padre = document.getElementsByClassName("card")[0];
-let hijo = document.getElementsByClassName("card-body")[0];
-//let hijo2 = document.getElementsByClassName("btnCheckout")[0];
- for (const ele of bascket) {
-  if(idProducto == ele.id){
-    hijo.remove();
-  }
- } 
+let deleteProduct = () => {
+  let hijo = document.getElementsByClassName("card-body")[0];
+
+  hijo.remove();
 };
 
 //añade la tarjeta carrito
@@ -208,21 +221,19 @@ const addCard = () => {
     button.className = "btn btn-secondary btnCheckout";
     button.innerText = "Checkout";
 
-    //carga el carrito 
-    if (bascket[0]) {
+    //carga el carrito
+    if (bascket.length > 0) {
       for (let i = 0; i < carrito.length; i++) {
         minimg.src = carrito[0][i].picture[i];
 
         p.innerText = `${bascket[i].title} \n ${bascket[i].precio} x ${bascket[i].cantidad}  $${bascket[i].precioTotal}`;
         trash.src = "/ecommerce-product-page-main/images/icon-delete.svg";
-
-       
       }
     } else {
       p.innerText = "Your cart is empty";
       p.style.textAlign = "center";
     }
-   
+
     minimg.style.width = "60px";
     minimg.style.borderRadius = "5px";
     minimg.style.height = "fit-content";
@@ -244,7 +255,6 @@ const addCard = () => {
     bodyCard.appendChild(trashLink);
     caja.appendChild(button);
 
-      
     let parentDiv = slide.parentNode;
 
     parentDiv.insertBefore(caja, slide);
@@ -252,7 +262,7 @@ const addCard = () => {
     box.remove();
   }
 };
- 
+
 /* btnDelete.addEventListener("click", (e)=>{
 
   e.preventDefault();
