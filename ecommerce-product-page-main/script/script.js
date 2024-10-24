@@ -40,13 +40,14 @@ makeRequest("GET", "/data.json")
     let price = document.getElementById("precio");
 
     /**Cuando se carguen mas datos ver como iterar dinamicamente este objeto **/
-   for (let i = 0; i < carrito.length; i++) {
-    
-      carrito[i].map((producto) => titulo.innerText = producto.title)
-      carrito[i].map((producto) => description.innerText = producto.description)
-      carrito[i].map((producto) => price.innerText = producto.price)
+    for (let i = 0; i < carrito.length; i++) {
+      carrito[i].map((producto) => (titulo.innerText = producto.title));
+      carrito[i].map(
+        (producto) => (description.innerText = producto.description)
+      );
+      carrito[i].map((producto) => (price.innerText = producto.price));
     }
- 
+
     /**Carga de imagenes **/
     crearDivImg(datums[0].picture[0], " active");
     for (let i = 0; i < datums[0].picture.length; i++) {
@@ -57,7 +58,6 @@ makeRequest("GET", "/data.json")
     console.log(err);
     console.error("Augh, there was an error!", err.statusText);
   });
-
 
 /**creando elementos html para alojar las imagenes */
 const crearDivImg = (url, otherClass) => {
@@ -88,7 +88,8 @@ btnBasket.addEventListener("click", (e) => {
   e.preventDefault();
   e.stopPropagation();
   addCard();
-  cuentaClicks++;
+  deleteProduct();
+   cuentaClicks++;
 });
 
 const btnAdd = document.getElementById("btnAdd");
@@ -113,7 +114,7 @@ btnAdd.addEventListener("click", (e) => {
     }
   }
   circulo = document.createElement("div");
-  circulo.className = "bg-secondary";
+  circulo.className = "conteo bg-secondary";
   let precio = document.getElementsByClassName("precioDescontado")[0].innerText;
   let cantidad = document.getElementsByClassName("value")[0].innerText;
   let foto = document.getElementById("img-shoos");
@@ -134,6 +135,7 @@ btnAdd.addEventListener("click", (e) => {
     foto: foto,
   });
 
+  //circulo de conteo de productos
   circulo.style.borderRadius = "50%";
   circulo.style.color = "white";
   circulo.style.width = "20px";
@@ -141,31 +143,50 @@ btnAdd.addEventListener("click", (e) => {
   circulo.style.position = "absolute";
   circulo.style.top = "-7px";
   circulo.style.right = "57px";
-  //  circulo.innerText = cantidad;
+  circulo.innerText = cantidad;
   circulo.style.textAlign = "center";
   circulo.style.fontSize = "12px";
   basketIcon.appendChild(circulo);
 });
 
-let actualProduct = () => {};
-
-
-
-
-
-
-
 
 //Elimina producto del carrito
-let deleteProduct = (idProducto) => {
-  //let padre = document.getElementsByClassName("card")[0];
-let hijo = document.getElementsByClassName("card-body")[0];
-//let hijo2 = document.getElementsByClassName("btnCheckout")[0];
- for (const ele of bascket) {
-  if(idProducto == ele.id){
-    hijo.remove();
+let deleteProduct = () => {
+  let deleteBoton = document.getElementsByClassName("deleteButton")[0];
+
+  if (bascket.length >= 1) {
+   
+    deleteBoton.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      for (const product of bascket) {
+        let indice = bascket.findIndex((obj) => obj.id === product.id);
+      let hijo = document.getElementsByClassName("card-body")[0];
+      let circulo = document.getElementsByClassName("conteo")[0];
+        let btnCheckout = document.getElementsByClassName("btnCheckout")[0];
+      bascket.splice(indice, 1);
+        
+        hijo.remove();
+        if(bascket.length==0) {
+          circulo.remove();
+          btnCheckout.remove();
+         let p = document.createElement("p");
+          let bodyCard =document.createElement("div");
+          let card = document.getElementsByClassName("card")[0];
+           p.innerText = "Your cart is empty.";
+           p.style.textAlign = "center";
+           p.className = "card-title text-warning";
+           p.style.fontSize = "15px";
+            card.appendChild(bodyCard);
+            bodyCard.appendChild(p);
+
+        }
+        
+      }
+     
+    });
   }
- } 
+  
 };
 
 //añade la tarjeta carrito
@@ -208,21 +229,19 @@ const addCard = () => {
     button.className = "btn btn-secondary btnCheckout";
     button.innerText = "Checkout";
 
-    //carga el carrito 
-    if (bascket[0]) {
+    //carga el carrito
+    if (bascket.length > 0) {
       for (let i = 0; i < carrito.length; i++) {
         minimg.src = carrito[0][i].picture[i];
 
         p.innerText = `${bascket[i].title} \n ${bascket[i].precio} x ${bascket[i].cantidad}  $${bascket[i].precioTotal}`;
         trash.src = "/ecommerce-product-page-main/images/icon-delete.svg";
-
-       
       }
     } else {
       p.innerText = "Your cart is empty";
       p.style.textAlign = "center";
     }
-   
+
     minimg.style.width = "60px";
     minimg.style.borderRadius = "5px";
     minimg.style.height = "fit-content";
@@ -244,7 +263,6 @@ const addCard = () => {
     bodyCard.appendChild(trashLink);
     caja.appendChild(button);
 
-      
     let parentDiv = slide.parentNode;
 
     parentDiv.insertBefore(caja, slide);
@@ -252,7 +270,7 @@ const addCard = () => {
     box.remove();
   }
 };
- 
+
 /* btnDelete.addEventListener("click", (e)=>{
 
   e.preventDefault();
