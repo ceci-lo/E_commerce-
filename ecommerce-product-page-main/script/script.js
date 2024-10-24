@@ -88,31 +88,8 @@ btnBasket.addEventListener("click", (e) => {
   e.preventDefault();
   e.stopPropagation();
   addCard();
-
-  //Delete Product
-  let deleteBoton = document.getElementsByClassName("deleteButton")[0];
-
-  if (bascket.length >= 1) {
-    console.log("backet", bascket);
-    deleteBoton.addEventListener("click", (e) => {
-      e.preventDefault();
-
-      for (const product of bascket) {
-        let indice = bascket.findIndex((obj) => obj.id === product.id);
-
-        bascket.splice(indice, 1);
-        let hijo = document.getElementsByClassName("card-body")[0];
-        hijo.remove();
-      }
-      console.log("backet", bascket);
-    });
-  }else{
-    p.innerText = "Your cart is empty";
-      p.style.textAlign = "center";
-    }
-  
-
-  cuentaClicks++;
+  deleteProduct();
+   cuentaClicks++;
 });
 
 const btnAdd = document.getElementById("btnAdd");
@@ -137,7 +114,7 @@ btnAdd.addEventListener("click", (e) => {
     }
   }
   circulo = document.createElement("div");
-  circulo.className = "bg-secondary";
+  circulo.className = "conteo bg-secondary";
   let precio = document.getElementsByClassName("precioDescontado")[0].innerText;
   let cantidad = document.getElementsByClassName("value")[0].innerText;
   let foto = document.getElementById("img-shoos");
@@ -176,9 +153,31 @@ let actualProduct = () => {};
 
 //Elimina producto del carrito
 let deleteProduct = () => {
-  let hijo = document.getElementsByClassName("card-body")[0];
+  let deleteBoton = document.getElementsByClassName("deleteButton")[0];
 
-  hijo.remove();
+  if (bascket.length >= 1) {
+   
+    deleteBoton.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      for (const product of bascket) {
+        let indice = bascket.findIndex((obj) => obj.id === product.id);
+      let hijo = document.getElementsByClassName("card-body")[0];
+      let circulo = document.getElementsByClassName("conteo")[0];
+
+      bascket.splice(indice, 1);
+        
+        hijo.remove();
+        if(bascket.length==0) circulo.remove();
+        
+      }
+     
+    });
+  }else{
+    p.innerText = "Your cart is empty";
+      p.style.textAlign = "center";
+    }
+  
 };
 
 //añade la tarjeta carrito
