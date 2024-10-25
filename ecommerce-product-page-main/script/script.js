@@ -271,13 +271,7 @@ const addCard = () => {
   }
 };
 
-/* btnDelete.addEventListener("click", (e)=>{
 
-  e.preventDefault();
-  e.stopPropagation();
-  deleteProduct();
-});
- */
 let menos = document.getElementsByClassName("minus")[0];
 let mas = document.getElementById("plus");
 let valor = document.getElementsByClassName("value")[0];

@@ -12051,3 +12051,16 @@ textarea.form-control-lg {
 
  }
 }
+@media (min-width: 1024px) {
+  .pe-3{
+    position: absolute;
+    top: 15px;
+  }
+ .container-nav-avatar { 
+     position: absolute;
+    right: 30px;
+  }
+  .nameCompany{
+    margin-left: 15px;
+  }
+}
