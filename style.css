@@ -12055,6 +12055,12 @@ textarea.form-control-lg {
   .pe-3{
     position: absolute;
     top: 15px;
+    margin-left: 35px;
+  }
+  .pe-3 > li {
+    margin-right: 35px;
+    cursor: pointer;
+    
   }
  .container-nav-avatar { 
      position: absolute;
@@ -12062,5 +12068,12 @@ textarea.form-control-lg {
   }
   .nameCompany{
     margin-left: 15px;
+  }
+  .contenedor {
+    display: flex;
+    flex-direction: row;
+    margin-top: 150px;
+    margin-left: 80px;
+    margin-right: 80px;
   }
 }
