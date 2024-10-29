@@ -76,6 +76,18 @@ const crearDivImg = (url, otherClass) => {
   div.appendChild(img);
 
   let carousel = document.getElementsByClassName("carousel-inner")[0];
+  //Mayor a 1024
+  if(window.outerWidth >= 1024){
+    console.log("swoy mayor a 1024");
+    if (otherClass && (otherClass == " active")) {
+      div.className = "img-thumbnail carousel-item1024-1";
+    } else {
+      div.className = "img-thumbnail carousel-item1024-2";
+      carousel.style.display = "grid !important";
+    }
+
+  }
+
 
   carousel.appendChild(div);
 };
