@@ -63,10 +63,10 @@ makeRequest("GET", "/data.json")
 const crearDivImg = (url, otherClass) => {
   let div = document.createElement("div");
 
-  if (otherClass) {
-    div.className = "carousel-item" + otherClass;
-  } else {
-    div.className = "carousel-item";
+if(window.outerWidth < 1024){
+  
+      div.className = "carousel-item" + (otherClass || "");
+    
   }
 
   let img = document.createElement("img");
@@ -76,19 +76,18 @@ const crearDivImg = (url, otherClass) => {
   div.appendChild(img);
 
   let carousel = document.getElementsByClassName("carousel-inner")[0];
+  let imgbigscreen = document.getElementsByClassName("img-bigscreen")[0];
   //Mayor a 1024
-  if(window.outerWidth >= 1024){
-    console.log("swoy mayor a 1024");
-    if (otherClass && (otherClass == " active")) {
-      div.className = "img-thumbnail carousel-item1024-1";
+  if (window.outerWidth >= 1024) {
+    if (otherClass) {
+      div.className = "img-thumbnail carousel-item-1";
     } else {
-      div.className = "img-thumbnail carousel-item1024-2";
+      div.className = "img-thumbnail carousel-item";
       carousel.style.display = "grid !important";
     }
+  } 
 
-  }
-
-
+  imgbigscreen.appendChild(div);
   carousel.appendChild(div);
 };
 

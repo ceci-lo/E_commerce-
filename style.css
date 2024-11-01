@@ -11999,6 +11999,9 @@ textarea.form-control-lg {
   .containerImg{
       width: 100%;
   }
+  .img-bigscreen{
+    display: none;
+  }
   /** Botones*/
  .btns{
   width:100%;
@@ -12076,15 +12079,17 @@ textarea.form-control-lg {
     margin-left: 80px;
     margin-right: 80px;
   }
-  
+  .img-bigscreen{
+    display: flex;
+  }
   .carousel .carousel-inner .carousel-control-prev .carousel-control-next {
     display: none !important;
   }
-  .carousel-item1024-1{
+  .carousel-item-1{
     display: flex;
     width: 91%;
   }
-  .carousel-item1024-2{
+  .carousel-item{
     width: 25%;
     margin: 10px;
     border-radius: 8%;
