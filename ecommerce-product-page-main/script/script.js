@@ -76,7 +76,7 @@ if(window.outerWidth < 1024){
   div.appendChild(img);
 
   let carousel = document.getElementsByClassName("carousel-inner")[0];
-  let imgbigscreen = document.getElementsByClassName("img-bigscreen")[0];
+  
   //Mayor a 1024
   if (window.outerWidth >= 1024) {
     if (otherClass) {
@@ -87,7 +87,7 @@ if(window.outerWidth < 1024){
     }
   } 
 
-  imgbigscreen.appendChild(div);
+
   carousel.appendChild(div);
 };
 

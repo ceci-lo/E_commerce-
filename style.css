@@ -12085,22 +12085,48 @@ textarea.form-control-lg {
   .carousel .carousel-inner .carousel-control-prev .carousel-control-next {
     display: none !important;
   }
+  .carousel{
+    width:100%;
+  }
   .carousel-item-1{
     display: flex;
-    width: 91%;
+    width: 100%;
+    border-radius: 20px;
   }
-  .carousel-item{
-    width: 25%;
+  .carousel-item-1 > img {
+    border-radius: 20px;
+  }
+  .carousel-item {
+    border-radius: 20%;
+    display: flex;
+    width: 19%;
     margin: 10px;
-    border-radius: 8%;
-    display: inline-flex;
-    width: 20%;
-    margin: 10px;
-    border-radius: 8%;
-    justify-content: flex-start;
+    justify-content: space-around;
     align-items: center;
     flex-direction: row;
-
   }
+  .carousel-item :hover{
+    color: var(--bs-orange);
+  }
+  .carousel-item > img {
+    border-radius: 10px;
+}
+.container3{
+  width:100%
+}
+.precios{
+  display: block;
+}
+.contieneBotones{
+  display: flex;
+}
+#btnCantidad{
+  display: inline-flex;
+  width: 30%;
+}
+#btnAdd{
+  width: 67%;
+  margin-left: 2.5%;
+}
 
 }
