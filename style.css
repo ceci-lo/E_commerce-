@@ -11980,6 +11980,7 @@ left: 0;
 z-index: 1030;
 margin: 0px;
 }
+
 @media (min-width: 375px) {
   .nameCompany{
       font-size: 30px !important;
@@ -11994,6 +11995,9 @@ margin: 0px;
   .container-nav-avatar {
       display: flex;
       justify-content: space-evenly;
+  }
+  hr{
+    display: none;
   }
   .img-cart{
       width:15%;
@@ -12069,8 +12073,13 @@ margin: 0px;
   .pe-3 > li {
     margin-right: 35px;
     cursor: pointer;
+    padding-bottom: 31px;
     
   }
+  .nav-item:hover {
+    border-bottom: 2.3px solid hsl(26, 100%, 55%) ;
+  }
+
  .container-nav-avatar { 
      position: absolute;
     right: 30px;
@@ -12081,7 +12090,7 @@ margin: 0px;
   .contenedor {
     display: flex;
     flex-direction: row;
-    margin-top: 150px;
+    margin-top: 90px;
     margin-left: 80px;
     margin-right: 80px;
   }
@@ -12111,7 +12120,7 @@ margin: 0px;
     align-items: center;
     flex-direction: row;
   }
-  .carousel-item :hover{
+  .carousel-item:hover{
     color: var(--bs-orange);
   }
   .carousel-item > img {
@@ -12135,13 +12144,16 @@ margin: 0px;
   margin-left: 2.5%;
 }
 hr{
+  display: block;
   margin-left: 90px;
   margin-right: 90px;
-
 }
 .menubarra{
   margin-left: 90px;
   margin-right: 90px;
+}
+.nav-link{
+  cursor: pointer;
 }
 
 }
