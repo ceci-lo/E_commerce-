@@ -11974,6 +11974,12 @@ textarea.form-control-lg {
   font-size: 16px;
   font-family: "Kumbh Sans", sans-serif;
 }
+.menubarra {top: 0;
+right: 0;
+left: 0;
+z-index: 1030;
+margin: 0px;
+}
 
 @media (min-width: 375px) {
   .nameCompany{
@@ -11990,6 +11996,9 @@ textarea.form-control-lg {
       display: flex;
       justify-content: space-evenly;
   }
+  hr{
+    display: none;
+  }
   .img-cart{
       width:15%;
   }
@@ -11998,6 +12007,9 @@ textarea.form-control-lg {
   }
   .containerImg{
       width: 100%;
+  }
+  .img-bigscreen{
+    display: none;
   }
   /** Botones*/
  .btns{
@@ -12023,9 +12035,11 @@ textarea.form-control-lg {
  .value{
   margin-bottom: 0px !important;
  }
- .container3{
+ .container3, .container3-1{
   margin: 5.5% ;
+  margin-right: 9%;
  }
+
  .precios{
   display: flex;
   justify-content: space-between;
@@ -12050,4 +12064,103 @@ textarea.form-control-lg {
   font-size: 17px;
 
  }
+}
+
+@media (min-width: 1024px) {
+  .pe-3{
+    position: absolute;
+    top: 15px;
+    margin-left: 35px;
+  }
+  .pe-3 > li {
+    margin-right: 35px;
+    cursor: pointer;
+    padding-bottom: 31px;
+    
+  }
+  .nav-item:hover {
+    border-bottom: 2.3px solid hsl(26, 100%, 55%) ;
+  }
+
+ .container-nav-avatar { 
+     position: absolute;
+    right: 30px;
+  }
+  .nameCompany{
+    margin-left: 15px;
+  }
+  .contenedor {
+    display: flex;
+    flex-direction: row;
+    margin-top: 90px;
+    margin-left: 80px;
+    margin-right: 80px;
+  }
+  .img-bigscreen{
+    display: flex;
+  }
+  .carousel .carousel-inner .carousel-control-prev .carousel-control-next {
+    display: none !important;
+  }
+  .carousel{
+    width:100%;
+  }
+  .carousel-item-1{
+    display: flex;
+    width: 100%;
+    border-radius: 20px;
+  }
+  .carousel-item-1 > img {
+    border-radius: 20px;
+  }
+  .carousel-item {
+    border-radius: 20%;
+    display: flex;
+    width: 19%;
+    margin: 10px;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+  }
+  .carousel-item:hover{
+    color: var(--bs-orange);
+  }
+  .carousel-item > img {
+    border-radius: 10px;
+}
+.container3{
+  width:100%
+}
+.container3-1{
+  width:100%;
+  text-align: center;
+  margin-top:5.5%;
+}
+.precios{
+  display: block;
+}
+.contieneBotones{
+  display: flex;
+}
+#btnCantidad{
+  display: inline-flex;
+  width: 30%;
+}
+#btnAdd{
+  width: 67%;
+  margin-left: 2.5%;
+}
+hr{
+  display: block;
+  margin-left: 90px;
+  margin-right: 90px;
+}
+.menubarra{
+  margin-left: 90px;
+  margin-right: 90px;
+}
+.nav-link{
+  cursor: pointer;
+}
+
 }

@@ -63,10 +63,10 @@ makeRequest("GET", "/data.json")
 const crearDivImg = (url, otherClass) => {
   let div = document.createElement("div");
 
-  if (otherClass) {
-    div.className = "carousel-item" + otherClass;
-  } else {
-    div.className = "carousel-item";
+if(window.outerWidth < 1024){
+  
+      div.className = "carousel-item" + (otherClass || "");
+    
   }
 
   let img = document.createElement("img");
@@ -76,6 +76,17 @@ const crearDivImg = (url, otherClass) => {
   div.appendChild(img);
 
   let carousel = document.getElementsByClassName("carousel-inner")[0];
+  
+  //Mayor a 1024
+  if (window.outerWidth >= 1024) {
+    if (otherClass) {
+      div.className = "img-thumbnail carousel-item-1";
+    } else {
+      div.className = "img-thumbnail carousel-item";
+      carousel.style.display = "grid !important";
+    }
+  } 
+
 
   carousel.appendChild(div);
 };
@@ -271,13 +282,7 @@ const addCard = () => {
   }
 };
 
-/* btnDelete.addEventListener("click", (e)=>{
 
-  e.preventDefault();
-  e.stopPropagation();
-  deleteProduct();
-});
- */
 let menos = document.getElementsByClassName("minus")[0];
 let mas = document.getElementById("plus");
 let valor = document.getElementsByClassName("value")[0];
