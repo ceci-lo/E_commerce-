@@ -11974,7 +11974,12 @@ textarea.form-control-lg {
   font-size: 16px;
   font-family: "Kumbh Sans", sans-serif;
 }
-
+.menubarra {top: 0;
+right: 0;
+left: 0;
+z-index: 1030;
+margin: 0px;
+}
 @media (min-width: 375px) {
   .nameCompany{
       font-size: 30px !important;
@@ -12054,6 +12059,7 @@ textarea.form-control-lg {
 
  }
 }
+
 @media (min-width: 1024px) {
   .pe-3{
     position: absolute;
@@ -12127,6 +12133,15 @@ textarea.form-control-lg {
 #btnAdd{
   width: 67%;
   margin-left: 2.5%;
+}
+hr{
+  margin-left: 90px;
+  margin-right: 90px;
+
+}
+.menubarra{
+  margin-left: 90px;
+  margin-right: 90px;
 }
 
 }
