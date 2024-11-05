@@ -12035,9 +12035,11 @@ margin: 0px;
  .value{
   margin-bottom: 0px !important;
  }
- .container3{
+ .container3, .container3-1{
   margin: 5.5% ;
+  margin-right: 9%;
  }
+
  .precios{
   display: flex;
   justify-content: space-between;
@@ -12128,6 +12130,11 @@ margin: 0px;
 }
 .container3{
   width:100%
+}
+.container3-1{
+  width:100%;
+  text-align: center;
+  margin-top:5.5%;
 }
 .precios{
   display: block;
