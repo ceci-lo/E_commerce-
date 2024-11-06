@@ -12064,6 +12064,14 @@ margin: 0px;
   font-size: 17px;
 
  }
+ .card{
+  position : absolute;
+  z-index: 2;
+  margin-top: 80px;
+  margin-left : 25px;
+  width : 90%;
+  height : 70vw;
+ }
 }
 
 @media (min-width: 1024px) {
@@ -12162,5 +12170,35 @@ hr{
 .nav-link{
   cursor: pointer;
 }
+.card{
+  position: absolute;
+  z-index: 2;
+  top: 0px;
+  margin-left: 990px;
+  width: 22%;
+  height: 15vw;
+}
 
+}
+
+@media (min-width:1440px){
+.contenedor{
+margin-left: 130px;
+margin-right: 130px;
+}
+.carousel-item-1{
+  width:80%;
+}
+
+.carousel-item {
+  width:16%;
+}
+.card{
+  position: absolute;
+  z-index: 2;
+  top: 0px;
+  margin-left: 1250px;
+  width: 22%;
+  height: 15vw;
+}
 }

@@ -206,12 +206,7 @@ const addCard = () => {
   if (!box) {
     let caja = document.createElement("div");
     caja.className = "card";
-    caja.style.position = "absolute";
-    caja.style.zIndex = "2";
-    caja.style.marginTop = "80px";
-    caja.style.marginLeft = "25px";
-    caja.style.width = "90%";
-    caja.style.height = "70vw";
+   
 
     let slide = document.getElementsByClassName("carousel")[0];
 
