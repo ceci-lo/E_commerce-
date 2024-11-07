@@ -11995,6 +11995,7 @@ margin: 0px;
   .container-nav-avatar {
       display: flex;
       justify-content: space-evenly;
+      position: relative;
   }
   hr{
     display: none;
@@ -12069,7 +12070,7 @@ margin: 0px;
   z-index: 2;
   margin-top: 80px;
   margin-left : 25px;
-  width : 90%;
+  width : 85%;
   height : 70vw;
  }
 }
@@ -12078,7 +12079,8 @@ margin: 0px;
   .pe-3{
     position: absolute;
     top: 15px;
-    margin-left: 35px;
+    margin-left: 10px;
+    padding-right: 0.3 rem !important;
   }
   .pe-3 > li {
     margin-right: 35px;
@@ -12092,7 +12094,11 @@ margin: 0px;
 
  .container-nav-avatar { 
      position: absolute;
-    right: 30px;
+    right: 0px;
+  }
+  .btnBasket{
+    position: relative;
+
   }
   .nameCompany{
     margin-left: 15px;
@@ -12174,9 +12180,9 @@ hr{
   position: absolute;
   z-index: 2;
   top: 0px;
-  margin-left: 990px;
-  width: 22%;
-  height: 15vw;
+    margin-left: 650px;
+    width: 24%;
+    height: auto;
 }
 
 }
