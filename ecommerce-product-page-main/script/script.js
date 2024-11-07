@@ -63,7 +63,7 @@ makeRequest("GET", "/data.json")
 const crearDivImg = (url, otherClass) => {
   let div = document.createElement("div");
 
-if(window.outerWidth < 1024){
+if(window.innerWidth < 1024){
   
       div.className = "carousel-item" + (otherClass || "");
     
@@ -78,10 +78,10 @@ if(window.outerWidth < 1024){
   let carousel = document.getElementsByClassName("carousel-inner")[0];
   
   //Mayor a 1024
-  if (window.outerWidth >= 1024) {
+  if (window.innerWidth >= 1024) {
     if (otherClass) {
       div.className = "img-thumbnail carousel-item-1";
-    } else {
+    } else{
       div.className = "img-thumbnail carousel-item";
       carousel.style.display = "grid !important";
     }
@@ -130,7 +130,7 @@ btnAdd.addEventListener("click", (e) => {
   let cantidad = document.getElementsByClassName("value")[0].innerText;
   let foto = document.getElementById("img-shoos");
   let basketIcon = document.getElementsByClassName("container-nav-avatar")[0];
-  basketIcon.style.position = "relative";
+ 
 
   parseInt(cantidad);
   parseInt(precio);
@@ -145,6 +145,10 @@ btnAdd.addEventListener("click", (e) => {
     precioTotal: precioTotal,
     foto: foto,
   });
+
+  let valor = document.getElementsByClassName("value")[0];
+
+  valor.innerHTML = 0 ;
 
   //circulo de conteo de productos
   circulo.style.borderRadius = "50%";
